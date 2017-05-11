@@ -24,10 +24,6 @@ def max_eigen_pair(matrix, eps, p, delta):
         else:
             z_next = y
 
-        print('=====#', k, '======')
-        print('lambda_next = ', lambda_next)
-        print('x =', z_next / np.linalg.norm(z_next), '\n')
-
         if (np.absolute(lambda_next[s_inter] - lambda_prev[s_inter]) <= eps).all():
             break
 
