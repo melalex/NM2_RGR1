@@ -5,6 +5,6 @@ from bin.power_method.second_min_pair import second_min_pair
 from bin.constants import *
 
 eigen_pair = max_eigen_pair(MATRIX_1, EPS, P, EPS)
-print(second_max_pair(MATRIX_1, eigen_pair, EPS, EPS))
-# min_pir = min_eigen_pair(MATRIX_1, eigen_pair[0], EPS, P, EPS)
-# print(second_min_pair(MATRIX_1, min_pir, EPS, EPS))
+# print(second_max_pair(MATRIX_1, eigen_pair, EPS, EPS))
+min_pir = min_eigen_pair(MATRIX_1, eigen_pair[0], EPS, P, EPS)
+print(second_min_pair(MATRIX_1, min_pir, EPS, EPS))

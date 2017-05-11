@@ -4,7 +4,7 @@ import math
 
 
 def __get_initial_y(x, eps):
-    y = np.array([[1.] for _ in range(len(x))])
+    y = np.array([[5.] for _ in range(len(x))])
     while np.linalg.norm(np.subtract(y, x)) <= eps:
         y *= 2
 
@@ -19,7 +19,7 @@ def second_max_pair(matrix, first_pair, eps, delta):
     lambda_next = np.array([[1.] for _ in range(len(first_pair[1]))])
     lambda_prev = np.copy(lambda_next)
 
-    s = []
+    s = [i for i in range(len(matrix))]
 
     for k in itertools.count(1):
         lambda_prev_prev = lambda_prev
@@ -29,22 +29,24 @@ def second_max_pair(matrix, first_pair, eps, delta):
         y_prev = y_next
         y_next = np.dot(matrix, y_prev)
 
-        s = [i for i, v in enumerate(y_next) if math.fabs(y_prev.item(i) - lambda_1 * y_prev.item(i)) > delta]
+        s_prev = s
+        s = [i for i, v in enumerate(y_next) if math.fabs(y_prev.item(i) - lambda_1 * y_prev_prev.item(i)) > delta]
+        s_inter = list(set(s_prev) & set(s))
 
         for i in s:
             lambda_next[i] = (y_next.item(i) - lambda_1 * y_prev.item(i)) / \
                              (y_prev.item(i) - lambda_1 * y_prev_prev.item(i))
 
-        if (lambda_next < 0).all() or (lambda_next > 0).all():
-            delta_1 = lambda_next - lambda_prev
-            delta_2 = lambda_prev - lambda_prev_prev
+        if k > 5 and ((lambda_next[s_inter] < 0).all() or (lambda_next[s_inter] > 0).all()):
+            delta_1 = np.abs(lambda_next[s_inter] - lambda_prev[s_inter])
+            delta_2 = np.abs(lambda_prev[s_inter] - lambda_prev_prev[s_inter])
             if (delta_1 > delta_2).all():
                 lambda_next = lambda_prev
                 y_next = y_prev
                 y_prev = y_prev_prev
                 break
 
-        if (np.absolute(lambda_next - lambda_prev) <= eps).all():
+        if (np.absolute(lambda_next[s_inter] - lambda_prev[s_inter]) <= eps).all():
             break
 
     z = y_next - lambda_1 * y_prev
