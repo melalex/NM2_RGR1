@@ -1,4 +1,5 @@
 import bin.aitken_process.max_eigen_pair
+from bin.inverse_iteration.inverse_iteration import inverse_iteration
 from bin.lu.decompose import decomposition
 from bin.lu.solve import solve
 
@@ -15,6 +16,4 @@ from bin.constants import *
 
 # print(bin.aitken_process.max_eigen_pair.max_eigen_pair(MATRIX_1, EPS, P, P, EPS))
 
-l, u = decomposition(MATRIX_1)
-
-print(solve(l, u, [[100.] for _ in range(len(MATRIX_1))]))
+print(inverse_iteration(MATRIX_2, EPS))
