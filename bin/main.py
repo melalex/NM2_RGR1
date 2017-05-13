@@ -1,5 +1,6 @@
 import bin.aitken_process.max_eigen_pair
 from bin.dot_product.max_eigen_pair import max_eigen_pair
+from bin.dot_product.next_pair import next_pair
 from bin.lu.decompose import decomposition
 from bin.lu.solve import solve
 
@@ -14,4 +15,5 @@ from bin.constants import *
 
 # print(bin.aitken_process.max_eigen_pair.max_eigen_pair(MATRIX_1, EPS, P, P, EPS))
 
-print(max_eigen_pair(MATRIX_2, EPS))
+max_pair = max_eigen_pair(MATRIX_2, EPS)
+print(next_pair(MATRIX_2, [max_pair], 3, EPS))

@@ -26,4 +26,3 @@ def max_eigen_pair(matrix, eps):
             break
 
     return lambda_next, z_next * -1
-
