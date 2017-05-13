@@ -34,9 +34,9 @@ def max_eigen_pair(matrix, eps, p, q, delta):
         if k % q == 0:
             z_next = z_prev_prev - np.square(z_prev - z_prev_prev) / (z_next - 2 * z_prev + z_prev_prev)
 
-        print('======#', k, '======')
-        print('u =', u_next)
-        print('z =', z_next, '\n')
+        # print('======#', k, '======')
+        # print('u =', u_next)
+        # print('z =', z_next, '\n')
 
         if (np.absolute(u_next[s_inter] - u_prev[s_inter]) <= eps).all():
             break
