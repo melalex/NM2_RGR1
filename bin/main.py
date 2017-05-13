@@ -4,6 +4,7 @@ from bin.dot_product.next_pair import next_pair
 from bin.jacobi_method.eigen_pairs import eigen_pairs
 from bin.lu.decompose import decomposition
 from bin.lu.solve import solve
+from bin.lu_method.eigenvalues import eigenvalues
 
 from bin.power_method.second_max_pair import second_max_pair
 from bin.power_method.second_min_pair import second_min_pair
@@ -19,4 +20,6 @@ from bin.constants import *
 # max_pair = max_eigen_pair(MATRIX_2, EPS)
 # print(next_pair(MATRIX_2, [max_pair], 3, EPS))
 
-print(eigen_pairs(MATRIX_2, EPS))
+# print(eigen_pairs(MATRIX_2, EPS))
+
+print(eigenvalues(MATRIX_2, EPS))
