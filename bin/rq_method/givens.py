@@ -1,33 +1,37 @@
 import numpy as np
 
-
-def zeroing_givens_coefficients(x, z):
-    if z == 0.0:
-        return 1.0, 0.0
-    r = np.hypot(x, z)
-    return x / r, -z / r
+from math import hypot
 
 
-def givens_rotation(coefficients, a, r1, r2):
-    c, s = coefficients
-    givens = np.array([[c, -s],
-                       [s, c]])
+def givens_rq(a):
+    n, m = np.shape(a)
 
-    a[[r1, r2], :] = np.dot(givens, a[[r1, r2], :])
+    q = np.identity(n)
+    r = np.copy(a)
+
+    rows, cols = np.tril_indices(n, -1, m)
+    for row, col in zip(rows, cols):
+        if r[row, col] != 0:
+            g = givens_rotation_matrix(r, row, col)
+
+            r = np.dot(g, r)
+            q = np.dot(q, g.T)
+
+    return q, r
 
 
-# def givens_rotation(matrix, i, j):
-#     n = len(matrix)
-#
-#     c = matrix[i][i] / math.sqrt(matrix[i][i] * matrix[i][i] + matrix[i][j] * matrix[i][j])
-#     s = matrix[i][j] / math.sqrt(matrix[i][i] * matrix[i][i] + matrix[i][j] * matrix[i][j])
-#
-#     g = np.identity(n)
-#
-#     g[i][i] = c
-#     g[i][j] = -s
-#     g[j][i] = s
-#     g[j][j] = c
-#
-#
-#     return g.dot(matrix)
+def givens_rotation_matrix(matrix, row, col):
+    a = matrix[col, col]
+    b = matrix[row, col]
+    n = len(matrix)
+
+    r = hypot(a, b)
+    c = a / r
+    s = -b / r
+
+    g = np.identity(n)
+    g[[col, row], [col, row]] = c
+    g[row, col] = s
+    g[col, row] = -s
+
+    return g
