@@ -14,6 +14,7 @@ def mix_eigen_pair(matrix, eps):
     z_next = y / np.linalg.norm(y)
 
     l, u = decomposition(matrix)
+    k = 0
 
     for k in itertools.count(1):
         z_prev = z_next
@@ -23,11 +24,7 @@ def mix_eigen_pair(matrix, eps):
         lambda_next = np.sum(y * z_prev) / np.sum(z_prev * z_prev)
         z_next = y / np.linalg.norm(y)
 
-        # print('======#', k, '======')
-        # print('u =', lambda_next)
-        # print('z =', z_next, '\n')
-
         if math.fabs(lambda_next - lambda_prev) <= eps:
             break
 
-    return 1 / lambda_next, z_next
+    return 1 / lambda_next, z_next, k

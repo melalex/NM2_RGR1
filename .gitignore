@@ -200,3 +200,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/linux,python,windows,pycharm
+/doc/.~lock.ЧМ_РГР_2.1.docx#
+/doc/ЧМ_РГР_2.1.docx
+/doc/.~lock.ЧМ_РГР_2.1.odt#

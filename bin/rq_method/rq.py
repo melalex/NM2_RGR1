@@ -1,8 +1,6 @@
 import itertools
 import numpy as np
 
-from bin.rq_method.givens import givens_rq, givens_rotation_matrix
-
 
 def eigen_pairs(matrix, eps):
     n = len(matrix)

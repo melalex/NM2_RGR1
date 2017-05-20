@@ -8,6 +8,7 @@ def max_eigen_pair(matrix, eps, p, delta):
     lambda_next = np.full(dimension, 9.)
     z_next = y / np.linalg.norm(y)
     s = [i for i in range(dimension)]
+    k = 0
 
     for k in itertools.count(1):
         z_prev = z_next
@@ -27,4 +28,4 @@ def max_eigen_pair(matrix, eps, p, delta):
         if (np.absolute(lambda_next[s_inter] - lambda_prev[s_inter]) <= eps).all():
             break
 
-    return (np.sum(lambda_next[s])) / len(s), z_next / np.linalg.norm(z_next)
+    return (np.sum(lambda_next[s])) / len(s), z_next / np.linalg.norm(z_next), k

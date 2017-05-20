@@ -11,7 +11,7 @@ def __get_initial_y(x, eps):
     return y
 
 
-def second_max_pair(matrix, first_pair, eps, delta):
+def second_max_pair(matrix, first_pair, eps, q, delta):
     y_next = __get_initial_y(first_pair[1], eps)
     y_prev = np.copy(y_next)
 
@@ -37,6 +37,9 @@ def second_max_pair(matrix, first_pair, eps, delta):
         for i in s:
             lambda_next[i] = (y_next.item(i) - lambda_1 * y_prev.item(i)) / \
                              (y_prev.item(i) - lambda_1 * y_prev_prev.item(i))
+
+        if k % q == 0:
+            y_next = y_prev_prev - np.square(y_prev - y_prev_prev) / (y_next - 2 * y_prev + y_prev_prev)
 
         if k > 5 and ((lambda_next[s_inter] < 0).all() or (lambda_next[s_inter] > 0).all()):
             delta_1 = np.abs(lambda_next[s_inter] - lambda_prev[s_inter])

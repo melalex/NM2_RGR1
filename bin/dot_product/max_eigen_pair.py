@@ -7,6 +7,7 @@ def max_eigen_pair(matrix, eps):
     dimension = len(matrix)
     y = np.ones(dimension).reshape(dimension, 1)
     lambda_next = 1
+    k = 0
 
     z_next = y / np.linalg.norm(y)
 
@@ -18,11 +19,7 @@ def max_eigen_pair(matrix, eps):
         lambda_next = np.sum(y * z_prev) / np.sum(z_prev * z_prev)
         z_next = y / np.linalg.norm(y)
 
-        # print('======#', k, '======')
-        # print('u =', lambda_next)
-        # print('z =', z_next, '\n')
-
         if math.fabs(lambda_next - lambda_prev) <= eps:
             break
 
-    return lambda_next, z_next * -1
+    return lambda_next, z_next * -1, k

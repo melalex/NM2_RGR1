@@ -1,3 +1,4 @@
+import itertools
 import numpy as np
 
 from bin.lu.decompose import decomposition
@@ -6,8 +7,9 @@ from bin.lu.decompose import decomposition
 def eigen_pairs(matrix, eps):
     a = np.array(matrix)
     p = np.identity(len(matrix))
+    k = 0
 
-    while True:
+    for k in itertools.count(1):
         l, u = decomposition(a)
         p = np.dot(p, l)
         a = np.dot(u, l)
@@ -15,4 +17,4 @@ def eigen_pairs(matrix, eps):
         if np.linalg.norm(np.tril(a, -1)) <= eps:
             break
 
-    return a.diagonal()
+    return a.diagonal(), [], k

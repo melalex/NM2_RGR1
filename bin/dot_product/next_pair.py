@@ -11,6 +11,7 @@ def next_pair(matrix, pairs, l, eps):
     y = np.array([[1] for _ in range(len(pairs[0][1]))])
     y = __orthogonalization(y, pairs)
     lambda_next = 1
+    k = 0
 
     z = y / np.linalg.norm(y)
 
@@ -25,11 +26,7 @@ def next_pair(matrix, pairs, l, eps):
         if k % l:
             z = __orthogonalization(z, pairs)
 
-        # print('======#', k, '======')
-        # print('u =', lambda_next)
-        # print('z =', z_next, '\n')
-
         if math.fabs(lambda_next - lambda_prev) <= eps:
             break
 
-    return lambda_next, z * -1
+    return lambda_next, z * -1, k
