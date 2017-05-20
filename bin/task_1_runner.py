@@ -1,7 +1,7 @@
 from bin.power_method.max_eigen_pair import max_eigen_pair
 from bin.power_method.min_eigen_pair import min_eigen_pair
 from bin.power_method.second_max_pair import second_max_pair
-from bin.power_method.second_min_pair import second_min_pair
+from bin.power_method import second_min_pair
 from bin.pretty_print import pretty_print
 from bin.constants import *
 

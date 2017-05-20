@@ -8,7 +8,4 @@ def second_min_pair(matrix, min_pair, eps, delta):
     u, v, k = min_pair
     b = np.linalg.inv(matrix)
     b = b - u * np.dot(v, np.transpose(v))
-    # ev = second_max_pair(b, min_pair, eps, delta)[1]
-    # kev = np.dot(matrix, ev)
-    # return kev[0] / ev[0], ev
     return max_eigen_pair(b, eps, 3, delta)
